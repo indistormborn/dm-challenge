@@ -11,6 +11,11 @@ class MainController {
   }
 
   async search (ingredients) {
+    await Promise.all([
+      Giphy.getInstance().verifyServiceStatus(),
+      RecipePuppy.getInstance().verifyServiceStatus()
+    ])
+
     const keywords = Array.isArray(ingredients) ? ingredients : ingredients.split(',')
     const searchedRecipes = await RecipePuppy.getInstance().searchRecipes(ingredients)
 

@@ -1,12 +1,12 @@
 {
   "name": "dm-challenge",
   "version": "1.0.0",
-  "description": "",
+  "description": "delivery much tech challenge",
   "main": "index.js",
   "scripts": {
     "test": "standard"
   },
-  "author": "\"Indiara C. Menegat\"",
+  "author": "Indiara C. Menegat",
   "license": "ISC",
   "devDependencies": {
     "chai": "^4.2.0",
