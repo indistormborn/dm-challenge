@@ -1,9 +1,8 @@
 const request = require('superagent')
 const httpCodes = require('http-status-codes')
+const { ServiceUnavailable, NotAbleToFindRecipe } = require('../utils/Errors')
 
 class RecipePuppyController {
-  static instance
-
   static getInstance () {
     if (!RecipePuppyController.instance) {
       RecipePuppyController.instance = new RecipePuppyController()
@@ -11,30 +10,25 @@ class RecipePuppyController {
     return RecipePuppyController.instance
   }
 
-  async searchRecipes(ingredients) {
+  async searchRecipes (ingredients) {
     try {
-      const { RECIPEPUPPY_BASE_URL: url } = process.env;
+      const { RECIPEPUPPY_BASE_URL: url } = process.env
 
-      await this.verifyServiceStatus();
+      const response = await request.get(`${url}?i=${ingredients}`)
 
-      const response = await request.get(`${url}?i=${ingredients}`);
-
-      return this.parseRecipesBody((JSON.parse(response.text)).results);
+      return this.parseRecipesBody((JSON.parse(response.text)).results)
     } catch (error) {
-      throw {
-        message: "Ocorreu um erro ao buscar pela receita.",
-        status: error.status
-      }
+      throw new NotAbleToFindRecipe(error.text, error.status)
     }
   }
 
-  async verifyServiceStatus() {
+  async verifyServiceStatus () {
     try {
       const { RECIPEPUPPY_BASE_URL: url } = process.env
       const response = await request.get(url)
-      return response.status === httpCodes.OK;
+      return response.status === httpCodes.OK
     } catch (error) {
-      throw error
+      throw new ServiceUnavailable('Recipe Puppy API is not available.', error.status)
     }
   }
 

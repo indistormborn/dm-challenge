@@ -1,7 +1,18 @@
+const { InvalidNumberOfIngredients } = require('../utils/Errors')
+
 class Util {
   static validateMaxParams (params, max) {
+    if (!params || !max) {
+      throw new InvalidNumberOfIngredients()
+    }
+
     params = Array.isArray(params) ? params : params.split(',')
-    return !(params.length < max)
+
+    if (params.length > max) {
+      throw new InvalidNumberOfIngredients()
+    }
+
+    return true
   }
 
   static alphabeticOrder (array, property = null) {
