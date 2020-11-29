@@ -15,6 +15,9 @@ class GiphyController {
   async searchGif(term) {
     try {
       const { GIPHY_BASE_URL: url, GIPHY_API_KEY: key } = process.env;
+
+      await this.verifyServiceStatus()
+
       const response = await request.get(`${url}search?api_key=${key}&q=${term}}&limit=1`);
 
       return this.parseGiphyBody(response.body)
@@ -32,7 +35,7 @@ class GiphyController {
       const response = await request.get(`${url}search?api_key=${key}&q=&limit=1`)
       return response.status === httpCodes.OK;
     } catch (error) {
-      return false;
+      throw error;
     }
   }
 

@@ -11,12 +11,15 @@ class RecipePuppyController {
     return RecipePuppyController.instance
   }
 
-  async searchRecipe(ingredients) {
+  async searchRecipes(ingredients) {
     try {
       const { RECIPEPUPPY_BASE_URL: url } = process.env;
+
+      await this.verifyServiceStatus();
+
       const response = await request.get(`${url}?i=${ingredients}`);
-      console.log(this.parseRecipeBody((JSON.parse(response.text)).results))
-      return this.parseRecipeBody((JSON.parse(response.text)).results);
+
+      return this.parseRecipesBody((JSON.parse(response.text)).results);
     } catch (error) {
       throw {
         message: "Ocorreu um erro ao buscar pela receita.",
@@ -31,11 +34,11 @@ class RecipePuppyController {
       const response = await request.get(url)
       return response.status === httpCodes.OK;
     } catch (error) {
-      return false
+      throw error
     }
   }
 
-  parseRecipeBody (recipesBody) {
+  parseRecipesBody (recipesBody) {
     const parsedRecipes = []
     for (const recipe of recipesBody) {
       const { ingredients, href, title } = recipe
