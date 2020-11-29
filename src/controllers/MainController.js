@@ -1,5 +1,6 @@
 const RecipePuppy = require('./RecipePuppyController')
 const Giphy = require('./GiphyController.js')
+const Util = require('../utils/Util')
 
 class MainController {
   static getInstance () {
@@ -15,6 +16,7 @@ class MainController {
 
     const promises = []
     for (const recipe of searchedRecipes) {
+      recipe.title = Util.sanitizeData(recipe.title)
       promises.push(
         Giphy.getInstance().searchGif(recipe.title)
           .then(gif => this.joinResultBodies(recipe, gif))
@@ -22,6 +24,7 @@ class MainController {
     }
 
     const recipes = await Promise.all(promises)
+      .then(results => Util.alphabeticOrder(results, 'title'))
     return { keywords, recipes }
   }
 
