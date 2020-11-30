@@ -1,3 +1,3 @@
 #!/bin/sh
 
-DEBUG=* node index.js.dockerignore
+DEBUG=* node index.js
