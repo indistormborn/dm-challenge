@@ -1,0 +1,24 @@
+{
+  "title": "Parsed Recipes",
+  "type": "array",
+    "items": {
+      "type": "object",
+      "required": [
+        "title",
+        "ingredients",
+        "link"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "ingredients": {
+          "type": "string"
+        },
+        "link": {
+          "type": "string"
+        }
+      }
+    }
+}

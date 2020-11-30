@@ -1,0 +1,47 @@
+{
+  "title": "Results",
+  "type": "object",
+  "required": [
+    "keywords",
+    "recipes"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "keywords": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "recipes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "title",
+          "ingredients",
+          "link",
+          "gif"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "ingredients": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "link": {
+            "type": "string"
+          },
+          "gif": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

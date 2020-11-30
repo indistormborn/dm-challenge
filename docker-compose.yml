@@ -1,0 +1,10 @@
+version: "2"
+services:
+  challenge:
+    restart: "always"
+    container_name: "recipes_api"
+    image: "dm-challenge:latest"
+    ports:
+      - "8080:8080"
+    volumes:
+      - "./.env:/tmp/challenge/.env"
