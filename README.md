@@ -36,7 +36,13 @@ docker-compose up
 ```
 
 #### 1.3 Rodando localmente
-Caso não queira rodar usando Docker, pode rodar direto na raiz do projeto usando Node. Também é necessário o arquivo de variaveis de ambiente.
+Caso não queira rodar usando Docker, pode rodar direto na raiz do projeto usando Node. Para isso, precisa instalar as dependencias. Também é necessário o arquivo de variaveis de ambiente.
+
+1. Instalando dependencias
+```
+npm install
+```
+2. Rodar 
 ```
 node index.js
 ```
