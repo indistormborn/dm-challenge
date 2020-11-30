@@ -18,7 +18,10 @@ Para realizar os passos de instalação será necessario primeiramente clonar es
 
 Para rodar são necessarias as seguintes variáveis de ambiente, que devem ser adicionadas à um arquivo `.env` na raiz do projeto.
 ```
-
+HTTP_PORT=8080
+GIPHY_API_KEY= [ CHAVE DE API GERADA ]
+RECIPEPUPPY_BASE_URL=http://www.recipepuppy.com/api/
+GIPHY_BASE_URL=https://api.giphy.com/v1/gifs/
 ```
 #### 1.2 Docker
 Na raiz do projeto, execute os seguintes comandos para gerar e rodar a aplicação. Nenhuma configuração adicional para rodar o Docker será necessária, visto que o Compose já se encarrega disso (expor a porta, definir a imagem que vai rodar, etc).
@@ -30,6 +33,12 @@ docker build . -t dm-challenge
 2. Rodar docker-compose
 ```
 docker-compose up 
+```
+
+#### 1.3 Rodando localmente
+Caso não queira rodar usando Docker, pode rodar direto na raiz do projeto usando Node. Também é necessário o arquivo de variaveis de ambiente.
+```
+node index.js
 ```
 
 ### 2. Utilização
