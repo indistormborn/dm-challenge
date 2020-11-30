@@ -2,12 +2,11 @@ const express = require('express')
 const cors = require('cors')
 const fs = require('fs')
 const path = require('path')
+const app = express()
 
 class Server {
   async init () {
     try {
-      const app = express()
-
       app.use(cors())
 
       const { HTTP_PORT } = process.env || 8080
@@ -29,6 +28,10 @@ class Server {
     } catch (error) {
       console.error('Error while running server', error)
     }
+  }
+
+  getServer () {
+    return app
   }
 }
 

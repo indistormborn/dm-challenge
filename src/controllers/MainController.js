@@ -22,6 +22,7 @@ class MainController {
     const promises = []
     for (const recipe of searchedRecipes) {
       recipe.title = Util.sanitizeData(recipe.title)
+      recipe.ingredients = recipe.ingredients.split(',')
       promises.push(
         Giphy.getInstance().searchGif(recipe.title)
           .then(gif => this.joinResultBodies(recipe, gif))
