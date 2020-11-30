@@ -4,14 +4,26 @@
   "description": "delivery much tech challenge",
   "main": "index.js",
   "scripts": {
-    "test": "standard"
+    "test": "standard --env mocha && mocha",
+    "clean-code": "standard --env mocha --fix"
   },
+  "standard": {
+    "ignore":[
+      "test"
+    ]
+  },
+  "pre-commit" : [
+    "clean-code"
+  ],
   "author": "Indiara C. Menegat",
   "license": "ISC",
   "devDependencies": {
     "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "chai-json-schema": "^1.5.1",
     "mocha": "^8.2.1",
-    "standard": "^16.0.3"
+    "standard": "^16.0.3",
+    "pre-commit": "^1.2.2"
   },
   "dependencies": {
     "cors": "^2.8.5",
